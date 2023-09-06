@@ -4,6 +4,18 @@ import path from "path"
 
 export type InputType = "names" | "file" | "squash"
 
+export function am({ patchPath }: { patchPath: string }) {
+  process.chdir("/verdaccio/storage")
+  // execSync("git init")
+  // execSync("git config user.name 'verdaccio'")
+  // execSync("git config user.email 'verdaccio@email.com'")
+  // execSync("git add .")
+  // try {
+    //   execSync('git commit -m "git commit before am"')
+    // } catch {}
+  execSync(`git am -3 ${patchPath}`)
+}
+
 export function generateNewPatch({
   inputType,
   packageNames,

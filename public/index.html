@@ -8,6 +8,7 @@
 
   <body>
     <form action="/download" method="post" enctype="multipart/form-data">
+      <h2>导出</h2>
       <p>
         <input type="radio" id="bynames" name="input-type" value="names" />
         <label for="bynames">输入包名称</label>
@@ -29,6 +30,16 @@
         <input type="file" id="file" name="package-file" accept=".json" />
       </p>
       <input type="submit" id="button" value="下载npm registry更新包" />
+    </form>
+    <div style="border-top: 1px dashed #ccc;margin-top: 26px;"></div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <h2>导入</h2>
+      <p>
+        <input type="file" name="file" accept=".patch">
+      </p>
+      <p>
+        <input type="submit" value="上传npm registry更新包">
+      </p>
     </form>
     <script>
       const button = document.getElementById("button")

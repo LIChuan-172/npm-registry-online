@@ -1,9 +1,11 @@
 import express from "express"
+import path from "path"
 import {
   InputType,
   generateNewPatch,
   generateOldPackagesPatch,
-  clearOldPackages
+  clearOldPackages,
+  am
 } from "./actions"
 import multer from "multer"
 import fs from "fs"
@@ -39,6 +41,18 @@ const storage = multer.diskStorage({
 app.use(express.json())
 
 app.use(express.static("public"))
+
+app.post("/upload", multer({ storage: storage }).single("file"), (req, res) => {
+  if (req.file) {
+    am({
+      patchPath: path.join(tmpDir, req.file.filename)
+    })
+    res.json({ success: `File ${req.file.filename} updated` })
+    return
+  }
+  res.json({ error: "no file" })
+  return
+})
 
 app.post(
   `/download`,
